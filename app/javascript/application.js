@@ -1,14 +1,26 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
-import "./controllers"
 
-// import controller from "./controllers/hello_controller.js"
+import { Application } from "@hotwired/stimulus"
+const application = Application.start()
+application.warnings = true
+application.debug    = false
+window.Stimulus      = application
+export { application }
+
+// globs work because of https://github.com/excid3/esbuild-rails
+import controllers from "./**/*_controller.js"
+controllers.forEach(controller => {
+  application.register(controller.name, controller.module.default)
+})
 
 // from https://www.betterstimulus.com/turbolinks/teardown.html
 document.addEventListener('turbo:before-cache', () => {
-  // controller.teardown() // I get an error here: Uncaught TypeError: hello_controller_default.teardown is not a function.
-  document.querySelector("sl-tab-group").style.visibility = "hidden"
-  console.log("torn down")
+  application.controllers.forEach(controller => {
+    if (typeof controller.teardown === 'function') {
+      controller.teardown()
+    }
+  })
 })
 
 
@@ -23,6 +35,6 @@ setBasePath("https://unpkg.com/@shoelace-style/shoelace@2.0.0-beta.57/dist/")
 
 // Promise.all(tagsUsed.map(tag => customElements.whenDefined(tag))).then(() => {
 //   // all components have loaded now, transition in and show the UI here.
-//   document.querySelector("sl-tab-group").style.visibility = "visible"
+//   // document.querySelector("sl-tab-group").style.visibility = "visible"
 //   console.log("Done loading.");
 // });
