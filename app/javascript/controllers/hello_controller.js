@@ -6,14 +6,15 @@ export default class extends Controller {
     console.log("connected")
   }
 
-  disconnect() {
-    document.querySelector("sl-tab-group").style.visibility = "hidden"
-    console.log("disconnected")
-  }
+  // // this really does hide component, but somehow it is still visible in the cached preview.
+  // disconnect() {
+  //   document.querySelector("sl-tab-group").style.visibility = "hidden"
+  //   console.log("disconnected")
+  // }
 
-  // does not work. see application.js
-  teardown() {
-    document.querySelector("sl-tab-group").style.visibility = "hidden"
-    console.log("torn down")
-  }
+  // // error when I try to call this. see application.js
+  // teardown() {
+  //   document.querySelector("sl-tab-group").style.visibility = "hidden"
+  //   console.log("torn down")
+  // }
 }

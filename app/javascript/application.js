@@ -2,12 +2,13 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
-import controller from "./controllers/hello_controller.js"
+// import controller from "./controllers/hello_controller.js"
 
 // from https://www.betterstimulus.com/turbolinks/teardown.html
-// but I get an error here: Uncaught TypeError: hello_controller_default.teardown is not a function.
 document.addEventListener('turbo:before-cache', () => {
-  // controller.teardown()
+  // controller.teardown() // I get an error here: Uncaught TypeError: hello_controller_default.teardown is not a function.
+  document.querySelector("sl-tab-group").style.visibility = "hidden"
+  console.log("torn down")
 })
 
 
