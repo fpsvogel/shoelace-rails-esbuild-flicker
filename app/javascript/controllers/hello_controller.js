@@ -10,4 +10,10 @@ export default class extends Controller {
     document.querySelector("sl-tab-group").style.visibility = "hidden"
     console.log("disconnected")
   }
+
+  // does not work. see application.js
+  teardown() {
+    document.querySelector("sl-tab-group").style.visibility = "hidden"
+    console.log("torn down")
+  }
 }
