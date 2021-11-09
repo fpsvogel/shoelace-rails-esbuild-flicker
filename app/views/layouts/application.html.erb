@@ -7,11 +7,15 @@
 
     <%# <link rel="stylesheet" href="https://unpkg.com/@shoelace-style/shoelace@2.0.0-beta.57/dist/themes/light.css"> %>
 
+    <%# <meta name="turbo-cache-control" content="no-cache"> %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <%= yield %>
+    <main data-controller="hello">
+      <%= yield %>
+    </main>
   </body>
 </html>
