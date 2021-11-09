@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    document.querySelector("sl-tab-group").style.visibility = "visible"
+    // // commented this out after moving the hide into 'turbo:before-cache', and now it works (*•̀ᴗ•́*)و ̑̑
+    // document.querySelector("sl-tab-group").style.visibility = "visible"
     console.log("connected")
   }
 
